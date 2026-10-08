@@ -1,113 +1,226 @@
-# Smart-four-way-traffic-light
-A smart four way traffic signal using arduino 
-// 4-Way Traffic Signal using Arduino UNO
+# 🚦 Four-Way Traffic Signal Using Arduino
 
-// North
-#define N_G 2
-#define N_Y 3
-#define N_R 4
+## 📌 Project Overview
 
-// East
-#define E_G 5
-#define E_Y 6
-#define E_R 7
+The **Four-Way Traffic Signal System using Arduino UNO** is a simple traffic management prototype designed to control traffic lights at a four-road intersection.
 
-// South
-#define S_G 8
-#define S_Y 9
-#define S_R 10
+The system uses an **Arduino UNO** to control Red, Yellow, and Green LEDs for four different directions:
 
-// West
-#define W_G 11
-#define W_Y 12
-#define W_R 13
+* North
+* East
+* South
+* West
 
-void setup() {
-  pinMode(N_G, OUTPUT);
-  pinMode(N_Y, OUTPUT);
-  pinMode(N_R, OUTPUT);
+Each direction gets a predefined **Green → Yellow → Red** sequence, allowing traffic to move one direction at a time.
 
-  pinMode(E_G, OUTPUT);
-  pinMode(E_Y, OUTPUT);
-  pinMode(E_R, OUTPUT);
+---
 
-  pinMode(S_G, OUTPUT);
-  pinMode(S_Y, OUTPUT);
-  pinMode(S_R, OUTPUT);
+## 🎯 Objectives
 
-  pinMode(W_G, OUTPUT);
-  pinMode(W_Y, OUTPUT);
-  pinMode(W_R, OUTPUT);
+* To design a simple four-way traffic signal system.
+* To understand Arduino digital output control.
+* To implement traffic light sequencing using Arduino.
+* To demonstrate basic embedded-system programming.
+* To create a low-cost traffic signal prototype.
 
-  // Initially all RED
-  allRed();
-}
+---
 
-void loop() {
+## ⚙️ Components Required
 
-  // NORTH
-  digitalWrite(N_R, LOW);
-  digitalWrite(N_G, HIGH);
-  delay(5000);
+| Component     |    Quantity |
+| ------------- | ----------: |
+| Arduino UNO   |           1 |
+| Red LED       |           4 |
+| Yellow LED    |           4 |
+| Green LED     |           4 |
+| 220Ω Resistor |          12 |
+| Breadboard    |           1 |
+| Jumper Wires  | As required |
+| USB Cable     |           1 |
 
-  digitalWrite(N_G, LOW);
-  digitalWrite(N_Y, HIGH);
-  delay(2000);
+---
 
-  digitalWrite(N_Y, LOW);
-  digitalWrite(N_R, HIGH);
+## 🔌 Pin Configuration
 
-  // EAST
-  digitalWrite(E_R, LOW);
-  digitalWrite(E_G, HIGH);
-  delay(5000);
+| Direction | Green | Yellow | Red |
+| --------- | ----: | -----: | --: |
+| North     |    D2 |     D3 |  D4 |
+| East      |    D5 |     D6 |  D7 |
+| South     |    D8 |     D9 | D10 |
+| West      |   D11 |    D12 | D13 |
 
-  digitalWrite(E_G, LOW);
-  digitalWrite(E_Y, HIGH);
-  delay(2000);
+---
 
-  digitalWrite(E_Y, LOW);
-  digitalWrite(E_R, HIGH);
+## 🔄 Working Principle
 
-  // SOUTH
-  digitalWrite(S_R, LOW);
-  digitalWrite(S_G, HIGH);
-  delay(5000);
+The Arduino controls the traffic signals in sequence.
 
-  digitalWrite(S_G, LOW);
-  digitalWrite(S_Y, HIGH);
-  delay(2000);
+### 1. North Direction
 
-  digitalWrite(S_Y, LOW);
-  digitalWrite(S_R, HIGH);
+* North Green → 5 seconds
+* North Yellow → 2 seconds
+* North Red → ON
 
-  // WEST
-  digitalWrite(W_R, LOW);
-  digitalWrite(W_G, HIGH);
-  delay(5000);
+### 2. East Direction
 
-  digitalWrite(W_G, LOW);
-  digitalWrite(W_Y, HIGH);
-  delay(2000);
+* East Green → 5 seconds
+* East Yellow → 2 seconds
+* East Red → ON
 
-  digitalWrite(W_Y, LOW);
-  digitalWrite(W_R, HIGH);
-}
+### 3. South Direction
 
-void allRed() {
-  digitalWrite(N_G, LOW);
-  digitalWrite(N_Y, LOW);
-  digitalWrite(N_R, HIGH);
+* South Green → 5 seconds
+* South Yellow → 2 seconds
+* South Red → ON
 
-  digitalWrite(E_G, LOW);
-  digitalWrite(E_Y, LOW);
-  digitalWrite(E_R, HIGH);
+### 4. West Direction
 
-  digitalWrite(S_G, LOW);
-  digitalWrite(S_Y, LOW);
-  digitalWrite(S_R, HIGH);
+* West Green → 5 seconds
+* West Yellow → 2 seconds
+* West Red → ON
 
-  digitalWrite(W_G, LOW);
-  digitalWrite(W_Y, LOW);
-  digitalWrite(W_R, HIGH);
-}
+After the West direction, the sequence starts again from North.
+
+---
+
+## 🧠 Program Flow
+
+```text
+          START
+            ↓
+       Initialize Pins
+            ↓
+       All Signals RED
+            ↓
+      NORTH → GREEN
+            ↓
+      NORTH → YELLOW
+            ↓
+      NORTH → RED
+            ↓
+       EAST → GREEN
+            ↓
+       EAST → YELLOW
+            ↓
+       EAST → RED
+            ↓
+      SOUTH → GREEN
+            ↓
+      SOUTH → YELLOW
+            ↓
+      SOUTH → RED
+            ↓
+       WEST → GREEN
+            ↓
+       WEST → YELLOW
+            ↓
+       WEST → RED
+            ↓
+        Repeat
+```
+
+---
+
+## 💡 LED Connection
+
+For each LED:
+
+```text
+Arduino Digital Pin
+        │
+        │
+      220Ω
+     Resistor
+        │
+       LED
+        │
+       GND
+```
+
+The **220Ω resistor** is used to limit current through the LED.
+
+---
+
+## 💻 Software
+
+* **Arduino IDE**
+* **Programming Language:** C/C++ (Arduino)
+* **Board:** Arduino UNO
+
+---
+
+## 📂 Repository Structure
+
+```text
+Four-Way-Traffic-Signal/
+│
+├── Four_Way_Traffic_Signal.ino
+├── README.md
+└── images/
+    └── circuit.jpg
+```
+
+---
+
+## 🚀 How to Run
+
+1. Install the **Arduino IDE**.
+2. Connect the Arduino UNO to your computer.
+3. Open `Four_Way_Traffic_Signal.ino`.
+4. Select:
+
+   * Board → Arduino UNO
+   * Correct COM Port
+5. Click **Verify**.
+6. Upload the program.
+7. Connect the LEDs according to the pin configuration.
+8. Observe the four-way traffic signal sequence.
+
+---
+
+## 📊 Timing
+
+| Signal |                    Duration |
+| ------ | --------------------------: |
+| Green  |                   5 seconds |
+| Yellow |                   2 seconds |
+| Red    | Depends on other directions |
+
+---
+
+## 🔮 Future Improvements
+
+The project can be upgraded by adding:
+
+* 🚗 IR sensors for vehicle detection
+* ⏱️ 7-segment countdown display
+* 🚶 Pedestrian crossing system
+* 🔊 Buzzer for pedestrian alerts
+* 📡 IoT monitoring
+* 📱 Mobile application
+* 🚑 Emergency vehicle priority
+* 🌐 Web-based traffic monitoring
+* 🤖 AI-based traffic density detection
+
+---
+
+## 🎓 Applications
+
+This prototype can be used for:
+
+* Embedded Systems projects
+* Arduino demonstrations
+* Traffic signal prototypes
+* Engineering mini projects
+* IoT and smart-city project development
+* Educational demonstrations
+
+---
+
+## 👨‍💻 Author
+
+**Roshan Kallis**
+
+Electrical and Electronics Engineering
+
+This project is created for **educational and academic purposes**. You are free to modify and improve the project for learning and non-commercial use.
